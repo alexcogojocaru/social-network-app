@@ -8,7 +8,7 @@ using System.Linq;
 namespace Controllers
 {
     [ApiController]
-    [Route("weatherforecast")]
+    [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
