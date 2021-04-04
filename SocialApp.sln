@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialApp", "SocialApp.csproj", "{DABF1DAF-7B4F-4F7E-8873-861AF4514EF4}"
 EndProject
+
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Interfaces.csproj", "{5A1350DA-7D19-430E-9467-653510948F76}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{C9E3495C-2B89-4661-AC1E-74C9EDDEE96B}"
@@ -16,6 +17,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commons", "Commons\Commons.csproj", "{FA6E1A91-5890-4280-9536-C13785C8ACCA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTest", "ConsoleAppTest\ConsoleAppTest.csproj", "{B49B7C2D-1FD0-4CF5-B141-5FC1A0C54659}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{5A1350DA-7D19-430E-9467-653510948F76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{C9E3495C-2B89-4661-AC1E-74C9EDDEE96B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "Controllers\Controllers.csproj", "{F29784E9-9CC2-49C7-BEE1-267BCF6AB982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

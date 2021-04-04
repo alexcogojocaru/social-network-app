@@ -25,6 +25,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
     <PackageReference Include="Microsoft.TestPlatform.ObjectModel" Version="16.9.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +54,18 @@
     <None Remove="ConsoleAppTest\**" />
     <None Remove="Controllers\**" />
     <None Remove="DatabaseManager\**" />
+    <Compile Remove="Controllers\**" />
+    <Compile Remove="Interfaces\**" />
+    <Compile Remove="Models\**" />
+    <Content Remove="$(SpaRoot)**" />
+    <Content Remove="Controllers\**" />
+    <Content Remove="Interfaces\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="Interfaces\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Remove="Controllers\**" />
     <None Remove="Interfaces\**" />
     <None Remove="Models\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
