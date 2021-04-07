@@ -11,5 +11,5 @@
 git clone https://github.com/alexcogojocaru/social-network-app.git 
 cd social-network-app
 docker build -t socialapp .
-docker run -p 5001:5001 -e PORT=5001 socialapp
+docker run -p 5001:5001 -e PORT=5001 -d socialapp 
 ```
