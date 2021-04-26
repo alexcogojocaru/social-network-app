@@ -11,6 +11,7 @@ namespace Controllers
     public class CommentController : ControllerBase
     {
         private static IComment _commentService = new CommentService();
+        private static IUser _userService = new UserService();
         private static uint index = 1;
 
         [HttpGet]
@@ -32,7 +33,7 @@ namespace Controllers
         [HttpPost]
         public IActionResult PostComment([FromBody] CommentEntity comment)
         {
-            if (comment == null)
+            if ((comment == null) || (_userService.GetUser(comment.Username) == null))
             {
                 return BadRequest();
             }
@@ -44,6 +45,11 @@ namespace Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateComment(uint id, [FromBody] CommentEntity comment)
         {
+            if (_userService.GetUser(comment.Username) == null)
+            {
+                return BadRequest();
+            }
+
             return _commentService.EditComment(id, comment.Username, comment.Content) ? Ok() : NotFound();
         }
 

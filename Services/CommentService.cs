@@ -8,7 +8,7 @@ namespace Services
 {
     public class CommentService : IComment
     {
-        private Dictionary<uint, CommentEntity> _comments = new Dictionary<uint, CommentEntity>();
+        private static Dictionary<uint, CommentEntity> _comments = new Dictionary<uint, CommentEntity>();
         
         public bool CreateComment(CommentEntity comment)
         {
