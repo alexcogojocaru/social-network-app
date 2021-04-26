@@ -2,6 +2,7 @@
 using Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Services
 {
@@ -9,9 +10,16 @@ namespace Services
     {
         private Dictionary<uint, CommentEntity> _comments = new Dictionary<uint, CommentEntity>();
         
-        public void CreateComment(CommentEntity comment)
+        public bool CreateComment(CommentEntity comment)
         {
-            _comments.Add(comment.Id, comment);
+            if (!Exists(comment.Id))
+            {
+                comment.Date = new DateTime();
+                _comments.Add(comment.Id, comment);
+                return true;
+            }
+
+            return false;
         }
 
         public bool DeleteComment(uint id, string username)
@@ -30,6 +38,7 @@ namespace Services
             if (HasRights(id, username))
             {
                 _comments[id].Content = content;
+                _comments[id].Date = new DateTime();
                 return true;
             }
 

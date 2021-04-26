@@ -5,7 +5,7 @@ namespace Interfaces
 {
     public interface IComment
     {
-        void CreateComment(CommentEntity comment);
+        bool CreateComment(CommentEntity comment);
 
         List<CommentEntity> GetComments();
 
