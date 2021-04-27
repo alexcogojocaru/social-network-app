@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Models
 {
-    public class FirendEntity
+    public class FriendEntity
     {
         [JsonProperty("username")]
         public string Username { get; set; }
