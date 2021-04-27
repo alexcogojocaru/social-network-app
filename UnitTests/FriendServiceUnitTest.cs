@@ -25,6 +25,9 @@ namespace UnitTests
     {
         private FriendService friendService = new FriendService();
 
+        /// <summary>
+        /// Tests if initially the list size is zero, as it should be
+        /// </summary>
         [TestMethod]
         public void FriendsListSizeShouldBeZero()
         {

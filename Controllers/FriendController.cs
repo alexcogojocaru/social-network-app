@@ -31,6 +31,15 @@ namespace Controllers
         private static IFriend _friendService = new FriendService();
         [HttpGet]
 
+
+        /// <summary>
+        /// Get method
+        /// </summary>
+        /// <returns>
+        /// An IActionResult object containing the response code and a list of friends <para/>
+        /// Status code - OK, if there are friends<para/>
+        /// Status code - NO CONTENT, if the there are no freinds
+        /// </returns>
         public IActionResult GetFriends()
         {
 
@@ -45,6 +54,14 @@ namespace Controllers
 
         }
 
+        /// <summary>
+        /// Gets one friend
+        /// </summary>
+        /// <param name="friendUsername">the friend id</param>
+        /// <returns>
+        /// Status code - OK, if the friend was found
+        /// Status code - NOT FOUND, if the friend wasn't found
+        /// </returns>
         [HttpGet("{friendUsername}")]
         public IActionResult GetFriend(string friendUsername)
         {
@@ -58,6 +75,11 @@ namespace Controllers
             return Ok(friend);
         }
 
+        /// <summary>
+        /// Creates an friend
+        /// </summary>
+        /// <param name="friend">the friend, taken from the body of the request</param>
+        /// <returns>Status code - CREATED</returns>
         [HttpPost]
         public IActionResult PostUser([FromBody] FriendEntity friend)
         {
@@ -70,6 +92,15 @@ namespace Controllers
             return CreatedAtAction(nameof(GetFriend), new { friend = friend }, friend);
         }
 
+        /// <summary>
+        /// Update one friend
+        /// </summary>
+        ///<param name="username"></param>
+        /// <param name="friend">the friend, taken from the body of the request</param>
+        /// <returns>
+        /// Status code - OK, if the friend was found
+        /// Status code - NOT FOUND, if the friend wasn't found
+        /// </returns>
         [HttpPut("{username}")]
         public IActionResult UpdateUser(string username, [FromBody] FriendEntity friend)
         {
@@ -81,6 +112,14 @@ namespace Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Delete one friend
+        /// </summary>
+        /// <param name="friendUsername">the friend id</param>
+        /// <returns>
+        /// Status code - OK, if the friend was found
+        /// Status code - NOT FOUND, if the friend wasn't found
+        /// </returns>
         [HttpDelete("{friendUsername}")]
         public IActionResult DeleteFriend(string friendUsername)
         {
