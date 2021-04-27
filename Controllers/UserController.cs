@@ -18,14 +18,15 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 using Models;
 using System.Collections.Generic;
+using Interfaces;
 
 namespace Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private static UserService _userService = new UserService();
+        private static IUser _userService = new UserService();
 
         /// <summary>
         /// Get method

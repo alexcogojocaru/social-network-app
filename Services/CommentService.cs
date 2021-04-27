@@ -1,4 +1,21 @@
-﻿using Interfaces;
+﻿/**************************************************************************
+ *                                                                        *
+ *  File:        CommentService.cs                                        *
+ *  Copyright:   (c) 2021, Cojocaru Daniel-Alexandru                      *
+ *  E-mail:      alex.cojocaru73@gmail.com                                *
+ *  Description: The service that manages the comments operations flow.   *
+ *                                                                        *
+ *  This program is free software; you can redistribute it and/or modify  *
+ *  it under the terms of the GNU General Public License as published by  *
+ *  the Free Software Foundation. This program is distributed in the      *
+ *  hope that it will be useful, but WITHOUT ANY WARRANTY; without even   *
+ *  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR   *
+ *  PURPOSE. See the GNU General Public License for more details.         *
+ *                                                                        *
+ **************************************************************************/
+
+
+using Interfaces;
 using Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +23,9 @@ using System;
 
 namespace Services
 {
-    public class CommentService : IComment
+    public class CommentService : IComment, IGenericService
     {
-        private static Dictionary<uint, CommentEntity> _comments = new Dictionary<uint, CommentEntity>();
+        private Dictionary<uint, CommentEntity> _comments = new Dictionary<uint, CommentEntity>();
         
         public bool CreateComment(CommentEntity comment)
         {
@@ -63,6 +80,11 @@ namespace Services
         public bool HasRights(uint id, string username)
         {
             return Exists(id) && _comments[id].Username.Equals(username);
+        }
+
+        public void PurgeData()
+        {
+            _comments.Clear();
         }
     }
 }

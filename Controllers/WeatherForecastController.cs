@@ -13,7 +13,7 @@ namespace Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "alex cojocaru", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+            "alex cojocaru", "aaaaaaaaaaaaaaaaaa", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
         [HttpGet]

@@ -39,6 +39,8 @@ namespace UnitTests
 
             // Assert
             Assert.AreEqual(commentsLength, expectedLength);
+
+            commentService.PurgeData();
         }
 
         [TestMethod]
@@ -66,6 +68,8 @@ namespace UnitTests
 
             // Assert
             Assert.IsTrue(result);
+
+            commentService.PurgeData();
         }
 
         [TestMethod]
@@ -80,6 +84,8 @@ namespace UnitTests
 
             // Assert
             Assert.IsFalse(result);
+
+            commentService.PurgeData();
         }
 
         [TestMethod]
@@ -103,6 +109,8 @@ namespace UnitTests
 
             // Assert
             Assert.IsTrue(result);
+
+            commentService.PurgeData();
         }
 
         [TestMethod]
@@ -133,6 +141,8 @@ namespace UnitTests
 
             // Assert
             Assert.AreEqual(result.Content, expectedString);
+
+            commentService.PurgeData();
         }
 
         [TestMethod]
@@ -149,6 +159,8 @@ namespace UnitTests
 
             // Assert
             Assert.IsFalse(result);
+
+            commentService.PurgeData();
         }
 
         [TestMethod]
@@ -165,6 +177,8 @@ namespace UnitTests
 
             // Assert
             Assert.IsTrue(result);
+
+            commentService.PurgeData();
         }
 
         [TestMethod]
@@ -182,6 +196,8 @@ namespace UnitTests
 
             // Assert
             Assert.IsFalse(result);
+
+            commentService.PurgeData();
         }
 
         [TestMethod]
@@ -199,6 +215,8 @@ namespace UnitTests
 
             // Assert
             Assert.IsTrue(result);
+
+            commentService.PurgeData();
         }
     }
 }

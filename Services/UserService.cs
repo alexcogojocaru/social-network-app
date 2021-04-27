@@ -23,7 +23,7 @@ namespace Services
 {
     public class UserService : IUser
     {
-        private Dictionary<string, UserEntity> _users = new Dictionary<string, UserEntity>();
+        private static Dictionary<string, UserEntity> _users = new Dictionary<string, UserEntity>();
 
         #region Public Methods
 

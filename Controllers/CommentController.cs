@@ -10,7 +10,7 @@ namespace Controllers
     [Route("api/[controller]")]
     public class CommentController : ControllerBase
     {
-        private static IComment _commentService = new CommentService();
+        private IComment _commentService = new CommentService();
         private static IUser _userService = new UserService();
         private static uint index = 1;
 
