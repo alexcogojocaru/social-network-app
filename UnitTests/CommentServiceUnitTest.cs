@@ -1,4 +1,21 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/**************************************************************************
+ *                                                                        *
+ *  File:        CommentServiceUnitTest.cs                                *
+ *  Copyright:   (c) 2021, Cojocaru Daniel-Alexandru                      *
+ *  E-mail:      alex.cojocaru73@gmail.com                                *
+ *  Description: Class that holds the test methods for the comment        *
+ *               service.                                                 *
+ *                                                                        *
+ *  This program is free software; you can redistribute it and/or modify  *
+ *  it under the terms of the GNU General Public License as published by  *
+ *  the Free Software Foundation. This program is distributed in the      *
+ *  hope that it will be useful, but WITHOUT ANY WARRANTY; without even   *
+ *  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR   *
+ *  PURPOSE. See the GNU General Public License for more details.         *
+ *                                                                        *
+ **************************************************************************/
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models;
 using Services;
 using System.Collections.Generic;
@@ -8,7 +25,14 @@ namespace UnitTests
     [TestClass]
     public class CommentServiceUnitTest
     {
+        /// <summary>
+        /// Instance of a CommentService class used for testing
+        /// </summary>
         private CommentService commentService = new CommentService();
+
+        /// <summary>
+        /// Temporary comment pool with premade instances
+        /// </summary>
         private List<CommentEntity> commentPool = new List<CommentEntity>()
         {
             new CommentEntity()
@@ -27,6 +51,9 @@ namespace UnitTests
             }
         };
 
+        /// <summary>
+        /// Tests if initially the list size is zero, as it should be
+        /// </summary>
         [TestMethod]
         public void CommentListShouldBeZero()
         {
@@ -39,10 +66,11 @@ namespace UnitTests
 
             // Assert
             Assert.AreEqual(commentsLength, expectedLength);
-
-            commentService.PurgeData();
         }
 
+        /// <summary>
+        /// Tests if the key with id 1 exists inside the service, without adding an entity
+        /// </summary>
         [TestMethod]
         public void DoesTheKeyExist()
         {
@@ -57,6 +85,9 @@ namespace UnitTests
             Assert.IsFalse(result);
         }
 
+        /// <summary>
+        /// Checks the ability to create a new comment, with an empty dataset
+        /// </summary>
         [TestMethod]
         public void CreateANewComment()
         {
@@ -72,6 +103,9 @@ namespace UnitTests
             commentService.PurgeData();
         }
 
+        /// <summary>
+        /// There cannot be 2 comments with the same id inside the dictionary
+        /// </summary>
         [TestMethod]
         public void CannotCreateCommentsWithTheSameId()
         {
@@ -88,6 +122,9 @@ namespace UnitTests
             commentService.PurgeData();
         }
 
+        /// <summary>
+        /// Checks if the user has rights for a comment
+        /// </summary>
         [TestMethod]
         public void DoesTheUserHaveRightsForTheCommentPositive()
         {
@@ -113,6 +150,9 @@ namespace UnitTests
             commentService.PurgeData();
         }
 
+        /// <summary>
+        /// Tries to fetch a non-existing comment
+        /// </summary>
         [TestMethod]
         public void GetACommentWithIdNull()
         {
@@ -127,6 +167,9 @@ namespace UnitTests
             Assert.IsNull(result);
         }
 
+        /// <summary>
+        /// Fetch a comment that already exists in the service
+        /// </summary>
         [TestMethod]
         public void GetACommentWithIdPositive()
         {
@@ -145,6 +188,9 @@ namespace UnitTests
             commentService.PurgeData();
         }
 
+        /// <summary>
+        /// Trying to delete a comment that a user doesn't have rights to
+        /// </summary>
         [TestMethod]
         public void DeleteCommentWithNoRights()
         {
@@ -163,6 +209,9 @@ namespace UnitTests
             commentService.PurgeData();
         }
 
+        /// <summary>
+        /// Trying to delete a comment that a user does have rights to
+        /// </summary>
         [TestMethod]
         public void DeleteCommentWithRights()
         {
@@ -181,6 +230,9 @@ namespace UnitTests
             commentService.PurgeData();
         }
 
+        /// <summary>
+        /// Trying to edit a comment that a user doesn't have rights to
+        /// </summary>
         [TestMethod]
         public void EditCommentWithNoRights()
         {
@@ -200,6 +252,9 @@ namespace UnitTests
             commentService.PurgeData();
         }
 
+        /// <summary>
+        /// Trying to delete a comment that a user does have rights to
+        /// </summary>
         [TestMethod]
         public void EditCommentWitRights()
         {

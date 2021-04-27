@@ -10,9 +10,8 @@ namespace Controllers
     [Route("api/[controller]")]
     public class CommentController : ControllerBase
     {
-        private IComment _commentService = new CommentService();
+        private static IComment _commentService = new CommentService();
         private static IUser _userService = new UserService();
-        private static uint index = 1;
 
         [HttpGet]
         public IActionResult GetComments()

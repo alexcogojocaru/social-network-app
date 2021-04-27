@@ -15,9 +15,7 @@
  *                                                                        *
  **************************************************************************/
 
-
 using Newtonsoft.Json;
-using System;
 
 namespace Models
 {
@@ -36,6 +34,6 @@ namespace Models
         public string Content { get; set; }
 
         [JsonProperty("date")]
-        public DateTime Date { get; set; } 
+        public string Date { get; set; } 
     }
 }

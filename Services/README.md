@@ -1,0 +1,1 @@
+﻿# Every service should also implement the IGeneric interface
