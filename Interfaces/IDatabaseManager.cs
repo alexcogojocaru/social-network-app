@@ -54,5 +54,7 @@ namespace Interfaces
         /// a list of retrieved rows
         /// </returns>
         List<string> RetrieveQuery(string command);
+
+        bool InsertQuery(string command);
     }
 }

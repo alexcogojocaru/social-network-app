@@ -22,9 +22,17 @@ using System;
 
 namespace Services
 {
-    public class CommentService : IComment, IGenericService
+    public class CommentService : AbstractService, IComment, IGenericService
     {
         private static Dictionary<uint, CommentEntity> _comments = new Dictionary<uint, CommentEntity>();
+
+        /// <summary>
+        /// Constructor for the class, to inherit the database connector
+        /// </summary>
+        public CommentService() : base()
+        {
+            
+        }
 
         /// <summary>
         /// Creates a new comment

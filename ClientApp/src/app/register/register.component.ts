@@ -9,11 +9,9 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
-  data = {
-    username: 'alex'
-  }
+  url: string;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) { 
     this.form = new FormGroup({
       username: new FormControl(),
       firstName: new FormControl(),
@@ -22,16 +20,18 @@ export class RegisterComponent implements OnInit {
       phone: new FormControl(),
       password: new FormControl(),
     });
+
+    this.url = baseUrl + 'api/user';
   }
 
   ngOnInit() {
   }
 
   postData(data) {
-    var url = 'http://localhost:5001/api/user';
+    console.log(this.url);
 
-    this.http.post(url, data).subscribe((result) => {
-      console.warn(result);
+    this.http.post(this.url, data).subscribe((result) => {
+      console.log(result);
     });
   }
 

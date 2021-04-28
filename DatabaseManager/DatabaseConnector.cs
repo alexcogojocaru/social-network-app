@@ -17,6 +17,7 @@
 using Npgsql;
 using Interfaces;
 using System.Collections.Generic;
+using Commons;
 
 namespace DatabaseManager
 {
@@ -24,6 +25,7 @@ namespace DatabaseManager
     {
         #region Static Fields
         private static DatabaseConnector _instance = null;
+        private string _connectionStrings;
         #endregion
 
         #region Fields
@@ -36,7 +38,10 @@ namespace DatabaseManager
         /// </summary>
         DatabaseConnector()
         {
-            
+            _connectionStrings = FileReader.Read(@"D:\social-network-app\res\credentials.txt");
+
+            Connect("");
+            OpenConnection();
         }
         #endregion
 
@@ -61,7 +66,7 @@ namespace DatabaseManager
         /// <param name="connectionStrings">the C# connection string format has to be passed</param>
         public void Connect(string connectionStrings)
         {
-            _conn = new NpgsqlConnection(connectionStrings);
+            _conn = new NpgsqlConnection(_connectionStrings);
         }
 
         /// <summary>
@@ -119,6 +124,11 @@ namespace DatabaseManager
             }
 
             return queries;
+        }
+
+        public bool InsertQuery(string command)
+        {
+            throw new System.NotImplementedException();
         }
         #endregion
     }
