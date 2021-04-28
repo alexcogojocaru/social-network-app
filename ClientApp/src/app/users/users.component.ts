@@ -12,6 +12,7 @@ export class UsersComponent {
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<User[]>(baseUrl + 'api/user').subscribe(result => {
       this.users = result;
+      console.log(this.users);
     }, error => console.error(error));
    }
 }
