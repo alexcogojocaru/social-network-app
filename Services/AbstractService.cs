@@ -8,7 +8,7 @@ namespace Services
 
         protected AbstractService()
         {
-            databaseConnector = DatabaseConnector.GetInstance();
+            //databaseConnector = DatabaseConnector.GetInstance();
         }
     }
 }
