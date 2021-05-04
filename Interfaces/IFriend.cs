@@ -26,13 +26,13 @@ namespace Interfaces
         /// </summary>
         /// <param name="friendUsername">friendUsername of the searched friend</param>
         /// <returns>the searched friend</returns>
-        FriendEntity GetFriend(string friendUsername);
+        List<FriendEntity> GetFriendList(string username);
 
         /// <summary>
         /// Returns all the friends
         /// </summary>
         /// <returns>a list with FriendEntity objects</returns>
-        List<FriendEntity> GetFriends();
+        FriendEntity GetFriendship(string username, string friendUsername);
 
         /// <summary>
         /// Creates a new friend
@@ -43,7 +43,7 @@ namespace Interfaces
         /// false - if the friend wasn't created<para/>
         /// The friend can't be created if the user that requested the action doesn't exist
         /// </returns>
-        bool CreateFriend(FriendEntity firend);
+        bool CreateFriend(string username, FriendEntity firend);
 
         /// <summary>
         /// Updates an friend
@@ -54,14 +54,14 @@ namespace Interfaces
         /// true if the friend has been updated<para/>
         /// false if the friend wasn't updated
         /// </returns>
-        bool UpdateFriend(string username, FriendEntity firend);
+        //bool UpdateFriend(string username, FriendEntity firend);
 
         /// <summary>
         /// Deletes a friend 
         /// </summary>
         /// <param name="friendUsername"></param>
         /// <returns>true if the friend was deleted, false otherwise</returns>
-        bool DeleteFriend(string friendUsername);
+        bool DeleteFriend(string username, string friendUsername);
 
     }
 }

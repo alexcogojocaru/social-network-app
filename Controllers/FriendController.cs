@@ -29,8 +29,6 @@ namespace Controllers
     {
 
         private static IFriend _friendService = new FriendService();
-        [HttpGet]
-
 
         /// <summary>
         /// Get method
@@ -40,12 +38,13 @@ namespace Controllers
         /// Status code - OK, if there are friends<para/>
         /// Status code - NO CONTENT, if the there are no freinds
         /// </returns>
-        public IActionResult GetFriends()
+        [HttpGet]
+        public IActionResult GetFriendship(string username, string friendUsername)
         {
 
-            List<FriendEntity> friends = _friendService.GetFriends();
+            FriendEntity friends = _friendService.GetFriendship(username, friendUsername);
 
-            if (friends.Count != 0)
+            if (friends != null)
             {
                 return Ok(friends);
             }
@@ -62,17 +61,25 @@ namespace Controllers
         /// Status code - OK, if the friend was found
         /// Status code - NOT FOUND, if the friend wasn't found
         /// </returns>
-        [HttpGet("{friendUsername}")]
-        public IActionResult GetFriend(string friendUsername)
+        [HttpGet("{username}")]
+        public IActionResult GetFriends(string username)
         {
-            FriendEntity friend = _friendService.GetFriend(friendUsername);
+            //FriendEntity friend = _friendService.GetFriend(friendUsername);
 
-            if (friend == null)
+            //if (friend == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return Ok(friend);
+            List<FriendEntity> friends = _friendService.GetFriendList(username);
+
+            if (friends == null)
             {
                 return NotFound();
             }
 
-            return Ok(friend);
+            return Ok(friends);
         }
 
         /// <summary>
@@ -80,16 +87,17 @@ namespace Controllers
         /// </summary>
         /// <param name="friend">the friend, taken from the body of the request</param>
         /// <returns>Status code - CREATED</returns>
-        [HttpPost]
-        public IActionResult PostUser([FromBody] FriendEntity friend)
+        [HttpPost("{username}")]
+        public IActionResult PostUser(string username, [FromBody] FriendEntity friend)
         {
             if (friend == null)
             {
                 return BadRequest();
             }
 
-            _friendService.CreateFriend(friend);
-            return CreatedAtAction(nameof(GetFriend), new { friend = friend }, friend);
+            //_friendService.CreateFriend(friend);
+            _friendService.CreateFriend(username, friend);
+            return CreatedAtAction(nameof(GetFriendship), new { friend = friend }, friend);
         }
 
         /// <summary>
@@ -101,16 +109,16 @@ namespace Controllers
         /// Status code - OK, if the friend was found
         /// Status code - NOT FOUND, if the friend wasn't found
         /// </returns>
-        [HttpPut("{username}")]
-        public IActionResult UpdateUser(string username, [FromBody] FriendEntity friend)
-        {
-            if (_friendService.UpdateFriend(username, friend))
-            {
-                return Ok();
-            }
+        //[HttpPut("{username}")]
+        //public IActionResult UpdateUser(string username, [FromBody] FriendEntity friend)
+        //{
+        //    if (_friendService.UpdateFriend(username, friend))
+        //    {
+        //        return Ok();
+        //    }
 
-            return NotFound();
-        }
+        //    return NotFound();
+        //}
 
         /// <summary>
         /// Delete one friend
@@ -120,10 +128,10 @@ namespace Controllers
         /// Status code - OK, if the friend was found
         /// Status code - NOT FOUND, if the friend wasn't found
         /// </returns>
-        [HttpDelete("{friendUsername}")]
-        public IActionResult DeleteFriend(string friendUsername)
+        [HttpDelete("{username}")]
+        public IActionResult DeleteFriend(string username, string friendUsername)
         {
-            if (_friendService.DeleteFriend(friendUsername))
+            if (_friendService.DeleteFriend(username, friendUsername))
             {
                 return Ok();
             }

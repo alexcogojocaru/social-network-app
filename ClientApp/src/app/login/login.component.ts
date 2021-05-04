@@ -34,21 +34,25 @@ export class LoginComponent implements OnInit {
       "password": this.form.get('password').value
     };
 
-    this.fetchUsers(user)
+    this.fetchUsers(user);
   }
 
   fetchUsers(user) {
     this.http.get<User[]>(this.url).subscribe(result => {
-      if (!this.burritoService.getLoggedInfo()) {
+      if (result && !this.burritoService.getLoggedInfo()) {
         result.forEach(it => {
-          if ((it.username == user["username"]) && (it.password == user["password"])) {
-            localStorage.setItem(it.username, it.password);
+          console.log(`fetched user = ${it.username}`);
 
+          if ((it.username === user["username"]) && (it.password === user["password"])) {
             this.burritoService.setLogInfo(true);
+            
+            localStorage.setItem(this.burritoService.getLoggedTag(), `${it.username}:${it.password}`);
           }
         });
       }
     }, error => console.error(error));
+
+    console.log(this.burritoService.getLoggedInfo());
   }
 }
 

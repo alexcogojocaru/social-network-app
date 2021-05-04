@@ -22,7 +22,7 @@ namespace Services
 
     public class FriendService : IFriend
     {
-        private Dictionary<string, FriendEntity> _friends = new Dictionary<string, FriendEntity>();
+        private Dictionary<string, List<FriendEntity>> _friends = new Dictionary<string, List<FriendEntity>>();
 
         #region Public Methods
 
@@ -31,11 +31,11 @@ namespace Services
         /// </summary>
         /// <param name="friendUsername">friendUsername of the searched friend</param>
         /// <returns>the searched friend</returns>
-        public FriendEntity GetFriend(string friendUsername)
+        public List<FriendEntity> GetFriendList(string username)
         {
-            if (_friends.ContainsKey(friendUsername))
+            if (_friends.ContainsKey(username))
             {
-                return _friends[friendUsername];
+                return _friends[username];
             }
             return null;
         }
@@ -44,10 +44,10 @@ namespace Services
         /// Returns all the friends stored
         /// </summary>
         /// <returns>the list of requested friends</returns>
-        public List<FriendEntity> GetFriends()
-        {
-            return _friends.Values.ToList();
-        }
+        //public List<FriendEntity> GetFriends()
+        //{
+        //    return _friends.Values.ToList();
+        //}
 
         /// <summary>
         /// Creates an friend
@@ -57,12 +57,20 @@ namespace Services
         /// true if the freind has been created<para/>
         /// false if the friend wasn't created
         /// </returns>
-        public bool CreateFriend(FriendEntity friend)
+        public bool CreateFriend(string username, FriendEntity friend)
         {
-            if (!_friends.ContainsKey(friend.Username))
+            if (!_friends.ContainsKey(username))
             {
-                _friends.Add(friend.Username, friend);
+                //_friends.Add(friend.Username, friend);
+                //return true;
+                _friends[username] = new List<FriendEntity>();
+                _friends[username].Add(friend);
+
                 return true;
+            }
+            else
+            {
+                _friends[username].Add(friend);
             }
 
             return false;
@@ -77,16 +85,16 @@ namespace Services
         /// true if the friend has been updated<para/>
         /// false if the friend wasn't updated
         /// </returns>
-        public bool UpdateFriend(string username, FriendEntity friend)
-        {
-            if (_friends.ContainsKey(username))
-            {
-                _friends[username] = friend;
-                return true;
-            }
+        //public bool UpdateFriend(string username, FriendEntity friend)
+        //{
+        //    if (_friends.ContainsKey(username))
+        //    {
+        //        _friends[username] = friend;
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         /// <summary>
         /// Deletes an friend
@@ -96,15 +104,40 @@ namespace Services
         /// true if the friend has been deleted<para/>
         /// false if the friend wasn't deleted
         /// </returns>
-        public bool DeleteFriend(string friendUsername)
+        public bool DeleteFriend(string username, string friendUsername)
         {
-            if (_friends.ContainsKey(friendUsername))
+            if (_friends.ContainsKey(username))
             {
-                _friends.Remove(friendUsername);
+                //_friends.Remove(friendUsername);
+                foreach (var friend in _friends[username])
+                {
+                    if (friend.FriendUsername.Equals(friendUsername))
+                    {
+                        _friends[username].Remove(friend);
+                        break;
+                    }
+                }
+
                 return true;
             }
 
             return false;
+        }
+
+        public FriendEntity GetFriendship(string username, string friendUsername)
+        {
+            if (_friends.ContainsKey(username))
+            {
+                foreach (var friend in _friends[username])
+                {
+                    if (friend.Username.Equals(friendUsername))
+                    {
+                        return friend;
+                    }
+                }
+            }
+
+            return null;
         }
 
         #endregion

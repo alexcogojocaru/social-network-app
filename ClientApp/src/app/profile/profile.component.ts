@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BurritoService } from '../burrito.service';
-import { User } from '../users/user';
+// import { User } from '../users/user';
 
 @Component({
   selector: 'app-profile',
@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   user: User;
   isLogged: boolean;
   friends: Friend[];
+  url: string;
   
   constructor(
     private route: ActivatedRoute, 
@@ -21,35 +22,46 @@ export class ProfileComponent implements OnInit {
     private burritoService: BurritoService,
     @Inject('BASE_URL') baseUrl: string
     ) { 
+    this.url = baseUrl;
     this.isLogged = this.burritoService.getLoggedInfo();
+    this.username = this.route.snapshot.paramMap.get('username');
     
-    if (this.isLogged) {
-      http.get<User[]>(baseUrl + 'api/user').subscribe(result => {
-        this.user = result.filter(it => it.username === this.username)[0];
-      });
+    console.log(`logged = ${this.isLogged}`);
+    console.log(`name = ${this.username}`);
 
-      http.get<Friend[]>(baseUrl + 'api/friend').subscribe(result => {
-        this.friends = result;
-      });
-    }
+    http.get<User>(baseUrl + `api/user/${this.username}`).subscribe(result => {
+      this.user = result;
+    });
+
+    http.get<Friend[]>(baseUrl + `api/friend/${this.username}`).subscribe(result => {
+      this.friends = result;
+    });
   }
 
   ngOnInit() {
-    this.username = this.route.snapshot.paramMap.get('username');
+    
+  }
+
+  unfriend(friendUsername) {
+    console.log(friendUsername);
+    this.http.delete(this.url + `api/friend/${this.username}?friendUsername=${friendUsername}`).subscribe(result => {
+      console.log('Unfriended');
+      window.location.reload();
+    });
   }
 }
 
-// interface User {
-//   username: string;
-//   firstName: string;
-//   lastName: string;
-//   email: string;
-//   phone: string;
-//   password: string;
-//   sex: number;
-//   city: string;
-//   country: string;
-// }
+interface User {
+  username: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  password: string;
+  sex: number;
+  city: string;
+  country: string;
+}
 
 interface Friend {
   username: string;

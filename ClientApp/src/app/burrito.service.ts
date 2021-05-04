@@ -4,10 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class BurritoService {
-  public static isLogged: boolean;
+  private static isLogged: boolean;
+  private static LOCAL_STORAGE_TAG: string; 
 
   constructor() { 
     BurritoService.isLogged = false;
+    BurritoService.LOCAL_STORAGE_TAG = "logged";
   }
 
   getLoggedInfo() {
@@ -16,5 +18,9 @@ export class BurritoService {
 
   setLogInfo(status: boolean) {
     BurritoService.isLogged = status;
+  }
+
+  getLoggedTag() {
+    return BurritoService.LOCAL_STORAGE_TAG;
   }
 }
