@@ -65,6 +65,5 @@ interface User {
 
 interface Friend {
   username: string;
-  friendUsername: string;
   friendshipData: string;
 }

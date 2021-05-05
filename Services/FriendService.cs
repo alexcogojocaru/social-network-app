@@ -16,6 +16,7 @@
 
 using Interfaces;
 using Models;
+using System;
 using System.Collections.Generic;
 
 namespace Services
@@ -52,21 +53,39 @@ namespace Services
         /// </returns>
         public bool CreateFriend(string username, FriendEntity friend)
         {
+            string friendshipTimestamp = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy");
+            friend.FriendshipDate = friendshipTimestamp;
+
             if (!_friends.ContainsKey(username))
             {
-                //_friends.Add(friend.Username, friend);
-                //return true;
                 _friends[username] = new List<FriendEntity>();
                 _friends[username].Add(friend);
-
-                return true;
             }
             else
             {
                 _friends[username].Add(friend);
             }
 
-            return false;
+            if (!_friends.ContainsKey(friend.Username))
+            {
+                FriendEntity temp = new FriendEntity();
+
+                temp.Username = username;
+                temp.FriendshipDate = friendshipTimestamp;
+
+                _friends[friend.Username] = new List<FriendEntity>();
+                _friends[friend.Username].Add(temp);
+            }
+            else
+            {
+                FriendEntity temp = new FriendEntity();
+
+                temp.Username = username;
+                temp.FriendshipDate = friendshipTimestamp;
+                _friends[friend.Username].Add(temp);
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -79,12 +98,20 @@ namespace Services
         {
             if (_friends.ContainsKey(username))
             {
-                //_friends.Remove(friendUsername);
                 foreach (var friend in _friends[username])
                 {
-                    if (friend.FriendUsername.Equals(friendUsername))
+                    if (friend.Username.Equals(friendUsername))
                     {
                         _friends[username].Remove(friend);
+                        break;
+                    }
+                }
+
+                foreach (var friend in _friends[friendUsername])
+                {
+                    if (friend.Username.Equals(username))
+                    {
+                        _friends[friendUsername].Remove(friend);
                         break;
                     }
                 }

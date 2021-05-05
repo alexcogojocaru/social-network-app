@@ -28,6 +28,7 @@ namespace Controllers
     public class FriendController : ControllerBase
     {
         private static IFriend _friendService = new FriendService();
+        private static IUser _userService = new UserService();
 
         /// <summary>
         /// Return the friendship between 2 users
@@ -81,7 +82,7 @@ namespace Controllers
         [HttpPost("{username}")]
         public IActionResult PostUser(string username, [FromBody] FriendEntity friend)
         {
-            if (friend == null)
+            if ((friend == null) || (_userService.GetUser(friend.Username) == null))
             {
                 return BadRequest();
             }
