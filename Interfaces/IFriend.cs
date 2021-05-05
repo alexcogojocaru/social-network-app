@@ -13,6 +13,7 @@
  *  PURPOSE. See the GNU General Public License for more details.         *
  *                                                                        *
  **************************************************************************/
+
 using Models;
 using System.Collections.Generic;
 
@@ -22,44 +23,37 @@ namespace Interfaces
     public interface IFriend
     {
         /// <summary>
-        /// Method that returns an friend based on the friendUsername provided
+        /// Method that returns friend list of a user
         /// </summary>
-        /// <param name="friendUsername">friendUsername of the searched friend</param>
-        /// <returns>the searched friend</returns>
+        /// <param name="username">the user's name</param>
+        /// <returns>the friendship list</returns>
         List<FriendEntity> GetFriendList(string username);
 
         /// <summary>
-        /// Returns all the friends
+        /// Returns all the friends of a user
         /// </summary>
-        /// <returns>a list with FriendEntity objects</returns>
+        /// <param name="username">the user's name</param>
+        /// <param name="friendUsername">the friend's name</param>
+        /// <returns>the friendship between the 2 users</returns>
         FriendEntity GetFriendship(string username, string friendUsername);
 
         /// <summary>
-        /// Creates a new friend
+        /// Creates a new friend and links him to a user
         /// </summary>
+        /// <param name="username">the user's name</param>
         /// <param name="friend">the friend entity that holds the data</param>
         /// <returns>
         /// true - if the friend was created<para/>
         /// false - if the friend wasn't created<para/>
         /// The friend can't be created if the user that requested the action doesn't exist
         /// </returns>
-        bool CreateFriend(string username, FriendEntity firend);
-
-        /// <summary>
-        /// Updates an friend
-        /// </summary>
-        /// <param name="username">the id</param>
-        /// <param name="friend">the friend entity</param>
-        /// <returns>
-        /// true if the friend has been updated<para/>
-        /// false if the friend wasn't updated
-        /// </returns>
-        //bool UpdateFriend(string username, FriendEntity firend);
+        bool CreateFriend(string username, FriendEntity friend);
 
         /// <summary>
         /// Deletes a friend 
         /// </summary>
-        /// <param name="friendUsername"></param>
+        /// <param name="username">the user's name</param>
+        /// <param name="friendUsername">the friend's name</param>
         /// <returns>true if the friend was deleted, false otherwise</returns>
         bool DeleteFriend(string username, string friendUsername);
 

@@ -27,21 +27,19 @@ namespace Controllers
 
     public class FriendController : ControllerBase
     {
-
         private static IFriend _friendService = new FriendService();
 
         /// <summary>
-        /// Get method
+        /// Return the friendship between 2 users
         /// </summary>
         /// <returns>
-        /// An IActionResult object containing the response code and a list of friends <para/>
-        /// Status code - OK, if there are friends<para/>
-        /// Status code - NO CONTENT, if the there are no freinds
+        /// An IActionResult object containing the response code and the friendship<para/>
+        /// Status code - OK, if the friendship is valid<para/>
+        /// Status code - NO CONTENT, if the friendship does not exist
         /// </returns>
         [HttpGet]
         public IActionResult GetFriendship(string username, string friendUsername)
         {
-
             FriendEntity friends = _friendService.GetFriendship(username, friendUsername);
 
             if (friends != null)
@@ -54,24 +52,16 @@ namespace Controllers
         }
 
         /// <summary>
-        /// Gets one friend
+        /// Gets the user's friends
         /// </summary>
-        /// <param name="friendUsername">the friend id</param>
+        /// <param name="username">the user's name</param>
         /// <returns>
-        /// Status code - OK, if the friend was found
-        /// Status code - NOT FOUND, if the friend wasn't found
+        /// Status code - OK, if the user was found
+        /// Status code - NOT FOUND, if the user wasn't found
         /// </returns>
         [HttpGet("{username}")]
         public IActionResult GetFriends(string username)
         {
-            //FriendEntity friend = _friendService.GetFriend(friendUsername);
-
-            //if (friend == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return Ok(friend);
             List<FriendEntity> friends = _friendService.GetFriendList(username);
 
             if (friends == null)
@@ -85,6 +75,7 @@ namespace Controllers
         /// <summary>
         /// Creates an friend
         /// </summary>
+        /// <param name="username">the user's name</param>
         /// <param name="friend">the friend, taken from the body of the request</param>
         /// <returns>Status code - CREATED</returns>
         [HttpPost("{username}")]
@@ -95,34 +86,14 @@ namespace Controllers
                 return BadRequest();
             }
 
-            //_friendService.CreateFriend(friend);
             _friendService.CreateFriend(username, friend);
             return CreatedAtAction(nameof(GetFriendship), new { friend = friend }, friend);
         }
 
         /// <summary>
-        /// Update one friend
-        /// </summary>
-        ///<param name="username"></param>
-        /// <param name="friend">the friend, taken from the body of the request</param>
-        /// <returns>
-        /// Status code - OK, if the friend was found
-        /// Status code - NOT FOUND, if the friend wasn't found
-        /// </returns>
-        //[HttpPut("{username}")]
-        //public IActionResult UpdateUser(string username, [FromBody] FriendEntity friend)
-        //{
-        //    if (_friendService.UpdateFriend(username, friend))
-        //    {
-        //        return Ok();
-        //    }
-
-        //    return NotFound();
-        //}
-
-        /// <summary>
         /// Delete one friend
         /// </summary>
+        /// <param name="username">the user's name</param>
         /// <param name="friendUsername">the friend id</param>
         /// <returns>
         /// Status code - OK, if the friend was found
@@ -139,5 +110,4 @@ namespace Controllers
             return NotFound();
         }
     }
-
 }

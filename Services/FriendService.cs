@@ -13,13 +13,13 @@
  *  PURPOSE. See the GNU General Public License for more details.         *
  *                                                                        *
  **************************************************************************/
+
 using Interfaces;
 using Models;
 using System.Collections.Generic;
-using System.Linq;
+
 namespace Services
 {
-
     public class FriendService : IFriend
     {
         private Dictionary<string, List<FriendEntity>> _friends = new Dictionary<string, List<FriendEntity>>();
@@ -27,10 +27,10 @@ namespace Services
         #region Public Methods
 
         /// <summary>
-        /// Method that returns an friend based on the friendUsername provided
+        /// Method that returns friend list of a user
         /// </summary>
-        /// <param name="friendUsername">friendUsername of the searched friend</param>
-        /// <returns>the searched friend</returns>
+        /// <param name="username">the user's name</param>
+        /// <returns>the friendship list</returns>
         public List<FriendEntity> GetFriendList(string username)
         {
             if (_friends.ContainsKey(username))
@@ -41,21 +41,14 @@ namespace Services
         }
 
         /// <summary>
-        /// Returns all the friends stored
+        /// Creates a new friend and links him to a user
         /// </summary>
-        /// <returns>the list of requested friends</returns>
-        //public List<FriendEntity> GetFriends()
-        //{
-        //    return _friends.Values.ToList();
-        //}
-
-        /// <summary>
-        /// Creates an friend
-        /// </summary>
-        /// <param name="friend">a friend object filled with the required properties</param>
+        /// <param name="username">the user's name</param>
+        /// <param name="friend">the friend entity that holds the data</param>
         /// <returns>
-        /// true if the freind has been created<para/>
-        /// false if the friend wasn't created
+        /// true - if the friend was created<para/>
+        /// false - if the friend wasn't created<para/>
+        /// The friend can't be created if the user that requested the action doesn't exist
         /// </returns>
         public bool CreateFriend(string username, FriendEntity friend)
         {
@@ -77,33 +70,11 @@ namespace Services
         }
 
         /// <summary>
-        /// Updates an friend
+        /// Deletes a friend 
         /// </summary>
-        /// <param name="username">the id</param>
-        /// <param name="friend">the friend entity</param>
-        /// <returns>
-        /// true if the friend has been updated<para/>
-        /// false if the friend wasn't updated
-        /// </returns>
-        //public bool UpdateFriend(string username, FriendEntity friend)
-        //{
-        //    if (_friends.ContainsKey(username))
-        //    {
-        //        _friends[username] = friend;
-        //        return true;
-        //    }
-
-        //    return false;
-        //}
-
-        /// <summary>
-        /// Deletes an friend
-        /// </summary>
-        /// <param name="friendUsername">the id</param>
-        /// <returns>
-        /// true if the friend has been deleted<para/>
-        /// false if the friend wasn't deleted
-        /// </returns>
+        /// <param name="username">the user's name</param>
+        /// <param name="friendUsername">the friend's name</param>
+        /// <returns>true if the friend was deleted, false otherwise</returns>
         public bool DeleteFriend(string username, string friendUsername)
         {
             if (_friends.ContainsKey(username))
@@ -124,6 +95,12 @@ namespace Services
             return false;
         }
 
+        /// <summary>
+        /// Returns all the friends of a user
+        /// </summary>
+        /// <param name="username">the user's name</param>
+        /// <param name="friendUsername">the friend's name</param>
+        /// <returns>the friendship between the 2 users</returns>
         public FriendEntity GetFriendship(string username, string friendUsername)
         {
             if (_friends.ContainsKey(username))
