@@ -16,7 +16,9 @@
  **************************************************************************/
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Models;
 using Services;
+using System.Collections.Generic;
 
 namespace UnitTests
 {
@@ -32,14 +34,15 @@ namespace UnitTests
         public void FriendsListSizeShouldBeZero()
         {
             // Arrange
-            int friendsListSize;
-            int expectedSize = 0;
+            List<FriendEntity> friendsList;
+            FriendEntity expected = null;
+            string username = "test";
 
             // Act
-            friendsListSize = friendService.GetFriends().Count;
+            friendsList = friendService.GetFriendList(username);
 
             // Assert
-            Assert.AreEqual(expectedSize, friendsListSize);
+            Assert.AreEqual(expected, friendsList);
         }
     }
 }
