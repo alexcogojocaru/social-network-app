@@ -54,19 +54,19 @@ namespace UnitTests
         /// <summary>
         /// Tests if initially the list size is zero, as it should be
         /// </summary>
-        //[TestMethod]
-        //public void CommentListShouldBeZero()
-        //{
-        //    // Arrange
-        //    int commentsLength;
-        //    int expectedLength = 0;
+        [TestMethod]
+        public void CommentListShouldBeZero()
+        {
+            // Arrange
+            int commentsLength;
+            int expectedLength = 0;
 
-        //    // Act
-        //    commentsLength = commentService.GetComments().Count;
+            // Act
+            commentsLength = commentService.GetComments().Count;
 
-        //    // Assert
-        //    Assert.AreEqual(commentsLength, expectedLength);
-        //}
+            // Assert
+            Assert.AreEqual(commentsLength, expectedLength);
+        }
 
         /// <summary>
         /// Tests if the key with id 1 exists inside the service, without adding an entity
@@ -106,49 +106,49 @@ namespace UnitTests
         /// <summary>
         /// There cannot be 2 comments with the same id inside the dictionary
         /// </summary>
-        //[TestMethod]
-        //public void CannotCreateCommentsWithTheSameId()
-        //{
-        //    // Arrange
-        //    bool result;
+        [TestMethod]
+        public void CannotCreateCommentsWithTheSameId()
+        {
+            // Arrange
+            bool result;
 
-        //    // Act
-        //    commentService.CreateComment(commentPool[0]);
-        //    result = commentService.CreateComment(commentPool[0]);
+            // Act
+            commentService.CreateComment(commentPool[0]);
+            result = commentService.CreateComment(commentPool[0]);
 
-        //    // Assert
-        //    Assert.IsFalse(result);
+            // Assert
+            Assert.IsFalse(result);
 
-        //    commentService.PurgeData();
-        //}
+            commentService.PurgeData();
+        }
 
         /// <summary>
         /// Checks if the user has rights for a comment
         /// </summary>
-        //[TestMethod]
-        //public void DoesTheUserHaveRightsForTheCommentPositive()
-        //{
-        //    // Arrange
-        //    uint id = 1;
-        //    string username = "test";
-        //    bool result;
+        [TestMethod]
+        public void DoesTheUserHaveRightsForTheCommentPositive()
+        {
+            // Arrange
+            uint id = 1;
+            string username = "test";
+            bool result;
 
-        //    CommentEntity comment = new CommentEntity()
-        //    {
-        //        Id = id,
-        //        Username = username
-        //    };
+            CommentEntity comment = new CommentEntity()
+            {
+                Id = id,
+                Username = username
+            };
             
 
-        //    // Act
-        //    commentService.CreateComment(comment);
-        //    result = commentService.HasRights(id, username);
+            // Act
+            commentService.CreateComment(comment);
+            result = commentService.HasRights(id, username);
 
-        //    // Assert
-        //    Assert.IsTrue(result);
+            // Assert
+            Assert.IsTrue(result);
 
-        //    commentService.PurgeData();
-        //}
+            commentService.PurgeData();
+        }
 
         /// <summary>
         /// Tries to fetch a non-existing comment
